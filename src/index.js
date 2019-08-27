@@ -29,12 +29,14 @@ const count = {
             }
         },
     },
-    effects: dispatch => ({
-        async asyncIncrement() {
+    effects: (dispatch) => ({
+        async asyncIncrement(s) {
+            // 需要处理数据可在这里进行处理
+            s = ++s
             await new Promise(resolve => {
                 setTimeout(resolve, 1000)
             })
-            dispatch.count.increment()
+            dispatch.count.increment(s)
         },
     }),
 }
@@ -45,8 +47,8 @@ const store = init({
 })
 // Use react-redux's <Provider /> and pass it the store.
 ReactDOM.render(
-    <Provider store={store}>
-        <App />
-    </Provider>,
-document.getElementById('root')
+  <Provider store={store}>
+      <App />
+  </Provider>,
+  document.getElementById('root')
 )
